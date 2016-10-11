@@ -1,2 +1,24 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-ms-azure-easyauth" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android"><name>easyauth</name><js-module name="easyauth" src="www/easyauth.js"><clobbers target="cordova.plugins.easyauth" /></js-module><platform name="android"><config-file parent="/*" target="res/xml/config.xml"><feature name="easyauth"><param name="android-package" value="cordova-plugin-ms-azure-easyauth.easyauth" /></feature></config-file><config-file parent="/*" target="AndroidManifest.xml" /><source-file src="src/android/easyauth.java" target-dir="src/cordova-plugin-ms-azure-easyauth/easyauth" /></platform><platform name="ios"><config-file parent="/*" target="config.xml"><feature name="easyauth"><param name="ios-package" value="easyauth" /></feature></config-file><source-file src="src/ios/easyauth.m" /></platform></plugin>
+<plugin id="cordova-plugin-ms-azure-easyauth" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>easyauth</name>
+	<js-module name="easyauth" src="www/easyauth.js">
+		<clobbers target="cordova.plugins.easyauth" />
+	</js-module>
+	<platform name="android">
+		<config-file parent="/*" target="res/xml/config.xml">
+			<feature name="easyauth">
+				<param name="android-package" value="cordova-plugin-ms-azure-easyauth.easyauth" />
+			</feature>
+		</config-file>
+		<config-file parent="/*" target="AndroidManifest.xml" />
+		<source-file src="src/android/easyauth.java" target-dir="src/cordova-plugin-ms-azure-easyauth/easyauth" />
+	</platform>
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="easyauth">
+				<param name="ios-package" value="easyauth" />
+			</feature>
+		</config-file>
+		<source-file src="src/ios/easyauth.m" />
+	</platform>
+</plugin>
