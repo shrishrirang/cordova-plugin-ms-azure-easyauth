@@ -34,6 +34,24 @@ var app = {
     // function, we must explicitly call 'app.receivedEvent(...);'
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
+
+        setTimeout(function() { // Add some delay so that the debugger can attach by then
+            try {
+                window.alert('here');
+
+                if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.coolMethod) {
+                    cordova.plugins.easyauth.coolMethod('param1', function(result) {
+                        window.alert('success.. ' + result);
+                    }, function(error) {
+                        window.alert('Failed.. ' + error);
+                    });
+                    
+                }
+            }
+            catch(error) {
+                window.alert(error);
+            }
+        }, 2500);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
