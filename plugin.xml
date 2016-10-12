@@ -25,18 +25,16 @@
 				<dict>
 					<key>CFBundleURLName</key>
 					<string>AzureEasyAuth</string>
-					<key>CFBundleURLTypes</key>
+					<key>CFBundleURLSchemes</key>
 					<array>
-						<dict>
-								<key>CFBundleURLSchemes</key>
-								<array>
-										<string>$EASYAUTH_APPID</string>
-								</array>
-						</dict>
+							<string>$EASYAUTH_APPID</string>
 					</array>
 				</dict>
 			</array>
 		</config-file>
 		<source-file src="src/ios/easyauth.m" />
+		<source-file src="src/ios/SafariAuth.h" />
+		<source-file src="src/ios/SafariAuth.m" />
+		<framework src="SafariServices.framework" />
 	</platform>
 </plugin>
