@@ -20,6 +20,9 @@
 				<param name="ios-package" value="easyauth" />
 			</feature>
 		</config-file>
+		<config-file target="*-Info.plist" parent="EASYAUTH_APPID">
+				<string>$EASYAUTH_APPID</string>
+		</config-file>
 		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
 			<array>
 				<dict>

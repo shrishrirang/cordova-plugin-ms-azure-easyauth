@@ -4,17 +4,15 @@
 
 @implementation SafariAuth
 
-@synthesize startUrl = _startUrl;
-@synthesize endUrl = _endUrl;
+@synthesize authUrl = _authUrl;
 
 SFSafariViewController *safariViewController;
 
--(instancetype)initWithStartUrl:(NSString *)startUrl endUrl:(NSString *)endUrl
+-(instancetype)initWithAuthUrl:(NSString *)url
 {
     if (self)
     {
-        _startUrl = startUrl;
-        _endUrl = endUrl;
+        _authUrl = url;
         //TODO: guard against minor differences like whitespace, trailing slash..
     }
     
@@ -27,20 +25,23 @@ SFSafariViewController *safariViewController;
     return viewController;
 }
 
--(NSString *)getToken
+-(void)beginAuth
 {
     //TODO: prevent reentrancy
     
     UIViewController *viewController = [self getViewController];
     
-    safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.startUrl]];
+    safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.authUrl]];
     safariViewController.delegate = self;
     
     [viewController presentViewController:safariViewController animated:NO completion:^{
         // something
     }];
-    
-    return nil;
+}
+
+-(void)dismiss
+{
+    [safariViewController dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully
@@ -56,6 +57,8 @@ SFSafariViewController *safariViewController;
 
 -(void)safariViewControllerDidFinish:(SFSafariViewController *)controller
 {
+    [self dismiss];
+    
     NSLog(@"Finished loading... ");
 }
 

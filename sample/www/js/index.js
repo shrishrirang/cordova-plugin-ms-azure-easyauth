@@ -37,15 +37,17 @@ var app = {
 
         setTimeout(function() { // Add some delay so that the debugger can attach by then
             try {
-                window.alert('here');
+                window.alert('Initiating facebook auth..');
 
                 if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.coolMethod) {
-                    cordova.plugins.easyauth.coolMethod('param1', function(result) {
-                        window.alert('success.. ' + result);
+                    cordova.plugins.easyauth.coolMethod('https://shrirs-demo.azurewebsites.net/.auth/login/facebook', function(result) {
+                        window.alert('Auth succesful! Token: ' + result);
                     }, function(error) {
-                        window.alert('Failed.. ' + error);
+                        window.alert('Failed! ' + error);
                     });
                     
+                } else {
+                    window.alert('Error initiating auth..');
                 }
             }
             catch(error) {

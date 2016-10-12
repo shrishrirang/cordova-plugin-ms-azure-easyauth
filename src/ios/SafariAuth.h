@@ -6,13 +6,13 @@
 @interface SafariAuth : NSObject<SFSafariViewControllerDelegate>
 
 //TODO: nullable specifiers
-@property (nonatomic) NSString* startUrl;
-@property (nonatomic) NSString* endUrl;
+@property (nonatomic) NSString* authUrl;
 
 // TODO: disallow init
--(nonnull instancetype)initWithStartUrl:(nonnull NSString *)startUrl endUrl:(nonnull NSString *)endUrl;
+-(nonnull instancetype)initWithAuthUrl:(nonnull NSString *)url;
 
--(NSString *)getToken;
+-(NSString *)beginAuth;
+-(void)dismiss;
 
 @end
 

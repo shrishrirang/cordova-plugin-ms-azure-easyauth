@@ -18,20 +18,15 @@ CDVInvokedUrlCommand *_command;
 
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
 {
-    CDVPluginResult* pluginResult = nil;
-    NSString* echo = [command.arguments objectAtIndex:0];
-
-    self.safariAuth = [[SafariAuth alloc] initWithStartUrl:@"https://shrirs-demo.azurewebsites.net/.auth/login/facebook?post_login_redirect_url=zzz://abc.def" endUrl:@"http://taco.visualstudio.com/"];
+    NSString* authUrl = [command.arguments objectAtIndex:0];
     
-    NSString *token = [self.safariAuth getToken];
+    NSString *easyAuthAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EASYAUTH_APPID"];
+    NSString *redirectUrl = [NSString stringWithFormat:@"%@://abc.def", easyAuthAppId];
+    authUrl = [NSString stringWithFormat:@"%@?post_login_redirect_url=%@", authUrl, redirectUrl];
 
-//    if (echo != nil && [echo length] > 0) {
-//        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:echo];
-//    } else {
-//        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR];
-//    }
-
-//    [self.commandDelegate sendPluginResult:pluginResult callbackId:command.callbackId];
+    self.safariAuth = [[SafariAuth alloc] initWithAuthUrl:authUrl];
+    
+    [self.safariAuth beginAuth];
     _command = command;
 }
 
@@ -45,13 +40,16 @@ CDVInvokedUrlCommand *_command;
     
     if ([url isKindOfClass:[NSURL class]]) {
         
-        NSString *redirectUri = @"zzz://abc.def";
+        NSString *easyAuthAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EASYAUTH_APPID"];
+        NSString *redirectUri = [NSString stringWithFormat:@"%@://abc.def", easyAuthAppId];
         NSString *base = [NSString stringWithFormat:@"%@/#token=", redirectUri];
         
         NSString *absoluteUrl = [[url absoluteString] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
         NSRange range = [absoluteUrl rangeOfString:base];
         NSString *tokenText = [absoluteUrl substringFromIndex:range.length];
         
+        [self.safariAuth dismiss];
+
         CDVPluginResult *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:tokenText];
         [self.commandDelegate sendPluginResult:pluginResult callbackId:_command.callbackId];
     }
