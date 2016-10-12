@@ -14,10 +14,28 @@
 		<source-file src="src/android/easyauth.java" target-dir="src/cordova-plugin-ms-azure-easyauth/easyauth" />
 	</platform>
 	<platform name="ios">
+      <preference name="EASYAUTH_APPID"/>
 		<config-file parent="/*" target="config.xml">
 			<feature name="easyauth">
 				<param name="ios-package" value="easyauth" />
 			</feature>
+		</config-file>
+		<config-file target="*-Info.plist" parent="CFBundleURLTypes">
+			<array>
+				<dict>
+					<key>CFBundleURLName</key>
+					<string>AzureEasyAuth</string>
+					<key>CFBundleURLTypes</key>
+					<array>
+						<dict>
+								<key>CFBundleURLSchemes</key>
+								<array>
+										<string>$EASYAUTH_APPID</string>
+								</array>
+						</dict>
+					</array>
+				</dict>
+			</array>
 		</config-file>
 		<source-file src="src/ios/easyauth.m" />
 	</platform>
