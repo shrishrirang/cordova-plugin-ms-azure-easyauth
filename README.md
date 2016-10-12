@@ -1,7 +1,7 @@
 # cordova-plugin-ms-azure-easyauth
 Cordova plugin for authentication using Azure Mobile Apps server flow
 
-## Running tests
+## Running sample
 ```
 cordova plugin add --local ../../cordova-plugin-ms-azure-easyauth --link --variable EASYAUTH_APPID=REPLACE_THIS_WITH_EASY_AUTH_ID
 cordova platform add ios
