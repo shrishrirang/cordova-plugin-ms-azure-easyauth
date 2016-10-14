@@ -39,15 +39,15 @@ var app = {
             try {
                 window.alert('Initiating facebook auth..');
 
-                if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.coolMethod) {
-                    cordova.plugins.easyauth.coolMethod('https://shrirs-demo.azurewebsites.net/.auth/login/facebook', function(result) {
+                if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.login) {
+                    cordova.plugins.easyauth.login('https://shrirs-demo.azurewebsites.net/.auth/login/facebook', function(result) {
                         window.alert('Auth succesful! Token: ' + result);
                     }, function(error) {
                         window.alert('Failed! ' + error);
                     });
                     
                 } else {
-                    window.alert('Error initiating auth..');
+                    window.alert('easyauth plugin not installed');
                 }
 
                 // Run again

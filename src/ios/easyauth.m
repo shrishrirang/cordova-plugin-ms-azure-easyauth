@@ -9,14 +9,14 @@
 
 @property (strong, nonatomic) SafariAuth *safariAuth;
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command;
+- (void)login:(CDVInvokedUrlCommand*)command;
 @end
 
 @implementation easyauth
 
 CDVInvokedUrlCommand *_command;
 
-- (void)coolMethod:(CDVInvokedUrlCommand*)command
+- (void)login:(CDVInvokedUrlCommand*)command
 {
     NSString* authUrl = [command.arguments objectAtIndex:0];
     NSString *easyAuthAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EASYAUTH_APPID"];
