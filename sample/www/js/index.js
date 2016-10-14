@@ -16,6 +16,26 @@
  * specific language governing permissions and limitations
  * under the License.
  */
+
+window.performLogin = function() {
+    try {
+        if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.login) {
+            cordova.plugins.easyauth.login('https://shrirs-demo.azurewebsites.net/.auth/login/facebook', function(result) {
+                window.alert('Auth succesful! Token: ' + result);
+            }, function(error) {
+                window.alert('Failed! ' + error);
+            });
+            
+        } else {
+            window.alert('easyauth plugin not installed');
+        }
+
+    }
+    catch(error) {
+        window.alert(error);
+    }    
+};
+
 var app = {
     // Application Constructor
     initialize: function() {
@@ -36,26 +56,7 @@ var app = {
         app.receivedEvent('deviceready');
 
         setTimeout(function() { // Add some delay so that the debugger can attach by then
-            try {
-                window.alert('Initiating facebook auth..');
-
-                if (cordova.plugins && cordova.plugins.easyauth && cordova.plugins.easyauth.login) {
-                    cordova.plugins.easyauth.login('https://shrirs-demo.azurewebsites.net/.auth/login/facebook', function(result) {
-                        window.alert('Auth succesful! Token: ' + result);
-                    }, function(error) {
-                        window.alert('Failed! ' + error);
-                    });
-                    
-                } else {
-                    window.alert('easyauth plugin not installed');
-                }
-
-                // Run again
-                //app.onDeviceReady();
-            }
-            catch(error) {
-                window.alert(error);
-            }
+            //performLogin();
 
         }, 0);
     },
