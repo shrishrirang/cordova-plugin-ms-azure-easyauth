@@ -11,7 +11,7 @@
 // TODO: disallow init
 -(nonnull instancetype)initWithAuthUrl:(nonnull NSString *)url;
 
--(NSString *)beginAuth;
+-(void)beginAuthWithViewController:(UIViewController *)viewController;
 -(void)dismiss;
 
 @end

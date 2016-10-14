@@ -19,17 +19,9 @@ SFSafariViewController *safariViewController;
     return self;
 }
 
--(UIViewController *)getViewController
-{
-    UIViewController *viewController = [UIApplication sharedApplication].keyWindow.rootViewController;
-    return viewController;
-}
-
--(void)beginAuth
+-(void)beginAuthWithViewController:(UIViewController *)viewController
 {
     //TODO: prevent reentrancy
-    
-    UIViewController *viewController = [self getViewController];
     
     safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.authUrl]];
     safariViewController.delegate = self;
@@ -47,8 +39,6 @@ SFSafariViewController *safariViewController;
 -(void)safariViewController:(SFSafariViewController *)controller didCompleteInitialLoad:(BOOL)didLoadSuccessfully
 {
     NSLog(@"didCompleteInitialLoad: %@", controller.title);
-    
-    //    [controller dismissViewControllerAnimated:NO completion:nil];
 }
 
 -(NSArray<UIActivity *> *)safariViewController:(SFSafariViewController *)controller activityItemsForURL:(NSURL *)URL title:(NSString *)title {
@@ -58,9 +48,6 @@ SFSafariViewController *safariViewController;
 -(void)safariViewControllerDidFinish:(SFSafariViewController *)controller
 {
     [self dismiss];
-    
-    NSLog(@"Finished loading... ");
 }
-
 
 @end

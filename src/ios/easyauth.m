@@ -19,14 +19,14 @@ CDVInvokedUrlCommand *_command;
 - (void)coolMethod:(CDVInvokedUrlCommand*)command
 {
     NSString* authUrl = [command.arguments objectAtIndex:0];
-    
     NSString *easyAuthAppId = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"EASYAUTH_APPID"];
+
     NSString *redirectUrl = [NSString stringWithFormat:@"%@://abc.def", easyAuthAppId];
     authUrl = [NSString stringWithFormat:@"%@?post_login_redirect_url=%@", authUrl, redirectUrl];
 
     self.safariAuth = [[SafariAuth alloc] initWithAuthUrl:authUrl];
     
-    [self.safariAuth beginAuth];
+    [self.safariAuth beginAuthWithViewController:self.viewController];
     _command = command;
 }
 

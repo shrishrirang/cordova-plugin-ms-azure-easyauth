@@ -49,11 +49,15 @@ var app = {
                 } else {
                     window.alert('Error initiating auth..');
                 }
+
+                // Run again
+                //app.onDeviceReady();
             }
             catch(error) {
                 window.alert(error);
             }
-        }, 2500);
+
+        }, 0);
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
